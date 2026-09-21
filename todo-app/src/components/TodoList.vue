@@ -1,26 +1,31 @@
-<!-- 変数宣言の箇所 -->
 <script setup lang="ts">
+import TodoItem from "@/components/TodoItem.vue";
 import type { Todo, TodoId } from "@/types";
 
-interface Props {
+type TodoListProps = {
   todos: Todo[];
-}
+};
+defineProps<TodoListProps>();
+
+const emit = defineEmits<{
+  remove: [id: TodoId];
+  toggle: [id: TodoId];
+}>();
 </script>
 
-<!-- レンダリング要素 -->
 <template>
-  <ul>
-    <li v-for="todo in todos" :key="todo.id" :class="{ done: todo.done }">
-      <input type="checkbox" v-model="todo.done" />
-      <span>{{ todo.text }}</span>
-      <button @click="remove(todo.id)">削除</button>
-    </li>
-  </ul>
+  <section>
+    <h2>todos</h2>
+    <ul>
+      <TodoItem
+        v-for="todo in todos"
+        :key="todo.id"
+        :todo="todo"
+        @remove="emit('remove', todo.id)"
+        @toggle="emit('toggle', todo.id)"
+      />
+    </ul>
+  </section>
 </template>
 
-<!-- CSS -->
-<style scoped>
-.done {
-  text-decoration: line-through;
-}
-</style>
+<style scoped></style>
