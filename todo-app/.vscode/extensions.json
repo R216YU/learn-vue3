@@ -1,0 +1,9 @@
+{
+  "recommendations": ["Vue.volar", "esbenp.prettier-vscode"],
+  "unwantedRecommendations": [
+    // Vue2 時代の拡張。Volar と競合するため入れないこと
+    "octref.vetur",
+    // Volar v2 で本体に統合済み。現在は非推奨
+    "Vue.vscode-typescript-vue-plugin"
+  ]
+}
